@@ -5,11 +5,12 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "preLaunchTask": "generate-routers",
             "name": "Launch Package",
             "type": "go",
             "request": "launch",
             "mode": "auto",
-            "program": "${workspaceFolder}/server/",
+            "program": "${workspaceFolder}/",
             "output": "toy-database"
         }
     ]

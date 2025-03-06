@@ -12,7 +12,9 @@ import (
 	_ "toy_database/routers"
 	"toy_database/tool"
 
+	"github.com/beego/beego/v2/core/logs"
 	beego "github.com/beego/beego/v2/server/web"
+	"github.com/beego/beego/v2/server/web/filter/cors"
 )
 
 func init() {
@@ -49,8 +51,18 @@ func main() {
 		log.Println("get run path error:", err)
 	} else {
 		tool.SetRootPath(runPath)
+		logs.Info("run path:", runPath)
 	}
-	beego.SetStaticPath("/static", "static")
+	beego.SetStaticPath("/", "static")
+	beego.SetStaticPath("/image", "data/image")
+	beego.InsertFilter("*", beego.BeforeRouter, cors.Allow(&cors.Options{
+		AllowCredentials: true,
+		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowHeaders: []string{"Origin", "Authorization", "Access-Control-Allow-Origin", "Access-Control-Allow-Headers",
+			"Content-Type", "Access-Token", "Accept", "x-requested-with", "Domain"},
+		ExposeHeaders: []string{"Content-Length", "Access-Control-Allow-Origin", "Access-Control-Allow-Headers", "Content-Type"},
+		AllowOrigins:  []string{"*"},
+	}))
 	go beego.Run()
 	sigCh := make(chan os.Signal, 1)
 	signal.Notify(sigCh, os.Interrupt, syscall.SIGTERM)
