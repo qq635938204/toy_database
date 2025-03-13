@@ -291,6 +291,9 @@ definitions:
     title: JsonToyInfo
     type: object
     properties:
+      brand:
+        description: 品牌
+        type: string
       buy_date:
         description: 购买日期
         type: string
@@ -305,6 +308,9 @@ definitions:
       mb_num:
         description: Matchbox编号
         type: string
+      model_name:
+        description: 型号
+        type: string
       name:
         type: string
       price:
@@ -315,6 +321,9 @@ definitions:
         description: 库存
         type: integer
         format: int64
+      year_on_base:
+        description: 底座年份
+        type: string
   models.JsonToyInfoResp:
     title: JsonToyInfoResp
     type: object

@@ -1,11 +1,19 @@
-<!-- filepath: e:\Code\toy_database\web\vite-toy-app\src\views\ToyList.vue -->
 <template>
   <div class="toy-list">
     <div class="carousel">
       <img :src="images[currentImageIndex]" alt="Carousel Image" />
+      <div class="carousel-indicators">
+        <span v-for="(image, index) in images" :key="index" :class="{ active: index === currentImageIndex }"></span>
+      </div>
     </div>
-    <input type="text" v-model="searchQuery" placeholder="搜索玩具..." />
-    <ToyCard v-for="toy in filteredToys" :key="toy.id" :toy="toy" />
+    <div class="search-container">
+      <input type="text" v-model="searchQuery" placeholder="搜索.." />
+      <button @click="searchToys"><i class="fas fa-search"></i></button>
+      <span class="fixed-text">mbx.zhang3woshi.cn</span>
+    </div>
+    <div class="toy-cards">
+      <ToyCard v-for="toy in filteredToys" :key="toy.id" :toy="toy" />
+    </div>
   </div>
 </template>
 
@@ -51,6 +59,10 @@ export default {
       setInterval(() => {
         this.currentImageIndex = (this.currentImageIndex + 1) % this.images.length
       }, 3000) // 每3秒切换一次图片
+    },
+    searchToys() {
+      // 搜索玩具的逻辑
+      console.log('搜索玩具:', this.searchQuery)
     }
   },
   computed: {
@@ -66,7 +78,8 @@ export default {
 <style scoped>
 .toy-list {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
 }
 .carousel {
   width: 100%;
@@ -80,10 +93,59 @@ export default {
   height: 100%;
   object-fit: cover;
 }
-input {
-  margin-bottom: 16px;
-  padding: 8px;
+.carousel-indicators {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 5px;
+}
+.carousel-indicators span {
+  display: block;
+  width: 10px;
+  height: 10px;
+  background-color: #ccc;
+  border-radius: 50%;
+}
+.carousel-indicators span.active {
+  background-color: #333;
+}
+.search-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   width: 100%;
+  margin-bottom: 16px;
+}
+.search-container input {
+  padding: 8px;
+  width: 300px; /* 固定宽度 */
   box-sizing: border-box;
+}
+.search-container button {
+  padding: 8px;
+  background-color: #333;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+.search-container button i {
+  font-size: 16px;
+}
+.fixed-text {
+  margin-left: auto;
+  padding-left: 16px;
+  padding-right: 16px; /* 增加右侧距离 */
+  font-size: 25px;
+  font-weight: bold; /* 加粗显示 */
+  color: #000; /* 正常颜色 */
+}
+.toy-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start; /* 从左到右显示 */
+  gap: 16px;
+  width: 100%; /* 确保卡片列表占满可用宽度 */
 }
 </style>

@@ -397,6 +397,10 @@
             "title": "JsonToyInfo",
             "type": "object",
             "properties": {
+                "brand": {
+                    "description": "品牌",
+                    "type": "string"
+                },
                 "buy_date": {
                     "description": "购买日期",
                     "type": "string"
@@ -416,6 +420,10 @@
                     "description": "Matchbox编号",
                     "type": "string"
                 },
+                "model_name": {
+                    "description": "型号",
+                    "type": "string"
+                },
                 "name": {
                     "type": "string"
                 },
@@ -428,6 +436,10 @@
                     "description": "库存",
                     "type": "integer",
                     "format": "int64"
+                },
+                "year_on_base": {
+                    "description": "底座年份",
+                    "type": "string"
                 }
             }
         },
