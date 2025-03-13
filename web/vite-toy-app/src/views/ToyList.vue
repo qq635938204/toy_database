@@ -1,7 +1,7 @@
 <template>
   <div class="toy-list">
     <div class="carousel">
-      <img :src="images[currentImageIndex]" alt="Carousel Image" />
+      <img v-for="(image, index) in images" :key="index" :src="image" :class="{'carousel-image': true, 'active': index === currentImageIndex}" alt="Carousel Image" />
       <div class="carousel-indicators">
         <span v-for="(image, index) in images" :key="index" :class="{ active: index === currentImageIndex }"></span>
       </div>
@@ -80,10 +80,13 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: #1c1c1c; /* 使用深灰色背景 */
+  min-height: 100vh;
+  color: white;
 }
 .carousel {
-  width: 100%;
-  height: 200px;
+  width: 80%; /* 与卡片列表区域宽度一致 */
+  height: 300px;
   margin-bottom: 16px;
   overflow: hidden;
   position: relative;
@@ -92,6 +95,17 @@ export default {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: opacity 1s ease-in-out; /* 添加过渡效果 */
+}
+.carousel img.carousel-image {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.carousel img.carousel-image.active {
+  opacity: 1;
+  position: relative;
 }
 .carousel-indicators {
   position: absolute;
@@ -115,13 +129,18 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
+  width: 80%;
   margin-bottom: 16px;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  border-radius: 5px;
 }
 .search-container input {
   padding: 8px;
   width: 300px; /* 固定宽度 */
   box-sizing: border-box;
+  border: none;
+  border-radius: 5px;
 }
 .search-container button {
   padding: 8px;
@@ -129,6 +148,7 @@ export default {
   color: white;
   border: none;
   cursor: pointer;
+  border-radius: 5px;
 }
 .search-container button i {
   font-size: 16px;
@@ -137,15 +157,15 @@ export default {
   margin-left: auto;
   padding-left: 16px;
   padding-right: 16px; /* 增加右侧距离 */
-  font-size: 25px;
+  font-size: 25px; /* 增大字体 */
   font-weight: bold; /* 加粗显示 */
-  color: #000; /* 正常颜色 */
+  color: #fff; /* 正常颜色 */
 }
 .toy-cards {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start; /* 从左到右显示 */
   gap: 16px;
-  width: 100%; /* 确保卡片列表占满可用宽度 */
+  width: 80%; /* 确保卡片列表占满可用宽度 */
 }
 </style>
