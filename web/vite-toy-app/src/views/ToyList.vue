@@ -12,23 +12,24 @@
       <span class="fixed-text">mbx.zhang3woshi.cn</span>
     </div>
     <div class="toy-cards">
-      <ToyCard v-for="toy in filteredToys" :key="toy.id" :toy="toy" />
+      <ToyCard v-for="toy in filteredToys" :key="toy.id" :toy="toy" @click="goToToyDetail(toy.id)" />
     </div>
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
 import axios from 'axios'
 import ToyCard from '../components/ToyCard.vue'
 
-export default {
+export default defineComponent({
   name: 'ToyList',
   components: {
     ToyCard
   },
   data() {
     return {
-      toys: [],
+      toys: [] as any[],
       searchQuery: '',
       images: [
         'http://127.0.0.1:9988/image/banner1.JPG',
@@ -63,6 +64,9 @@ export default {
     searchToys() {
       // 搜索玩具的逻辑
       console.log('搜索玩具:', this.searchQuery)
+    },
+    goToToyDetail(toyId: string) {
+      this.$router.push({ name: 'ToyDetail', params: { id: toyId } })
     }
   },
   computed: {
@@ -72,7 +76,7 @@ export default {
       );
     }
   }
-}
+})
 </script>
 
 <style scoped>

@@ -1,21 +1,24 @@
 {
   "name": "vite-toy-app",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
+  "version": "1.0.0",
+  "main": "index.js",
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.8.3",
+    "vue": "^3.5.13",
+    "vue-router": "^4.0.13"
   },
   "devDependencies": {
-    "@types/vue": "^1.0.31",
-    "typescript": "~5.7.2",
-    "vite": "^6.2.0"
-  },
-  "dependencies": {
     "@vitejs/plugin-vue": "^5.2.1",
-    "axios": "^1.8.1",
-    "vue": "^3.5.13"
-  }
+    "vite": "^6.2.2"
+  },
+  "description": ""
 }

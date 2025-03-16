@@ -63,6 +63,15 @@ func init() {
 
     beego.GlobalControllerRouter["toy_database/controllers:ToyController"] = append(beego.GlobalControllerRouter["toy_database/controllers:ToyController"],
         beego.ControllerComments{
+            Method: "GetToyInfo",
+            Router: `/:id`,
+            AllowHTTPMethods: []string{"get"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
+    beego.GlobalControllerRouter["toy_database/controllers:ToyController"] = append(beego.GlobalControllerRouter["toy_database/controllers:ToyController"],
+        beego.ControllerComments{
             Method: "List",
             Router: `/list`,
             AllowHTTPMethods: []string{"get"},

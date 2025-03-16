@@ -83,3 +83,33 @@ func (c *ToyController) List() {
 		logs.Error("ServeJSON error:", err)
 	}
 }
+
+// 获取玩具详情
+// @Title 获取玩具详情
+// @Description 获取玩具详情
+// @Param   id    path   string     true   "玩具ID"
+// @Success 200 {object} models.JsonToyInfo
+// @Failure 400 Bad Request
+// @Failure 404 Not found
+// @Failure 500 Internal Server Error
+// @router /:id [get]
+func (c *ToyController) GetToyInfo() {
+	id := c.Ctx.Input.Param(":id")
+	ret := models.JsonToyInfo{
+		ID:          id,
+		Name:        "奥迪·卡特罗",
+		Price:       10.5,
+		Stock:       1,
+		ImagePath:   "image/001.jpg",
+		Description: "该车是莱斯尼的遗作之一，合金底盘，有避震，透明独立大灯，后挡风玻璃有蚀刻电热除雾丝。最早于1982年在英格兰生产。引入现代轿车制造风格以后，火柴盒模型更趋时尚和现代化。该车便是迎合当时德国奥迪汽车公司研发的Quattro四轮驱动系列的问世而开发的品种。火柴盒不但在1-75小比例系列中及时推出了该车型，还在其著名的SuperKings“超级王牌”系列中推出了1/38左右大比例模型（参见K95）。1983年起在澳门生产，1987年开始在上海环球制造，1992年模具转移到巴西Inbrima S.A.生产，直到1993年最终退出市场。（数据库基本资料图片提供者：Miketorres，特此表示感谢！）",
+		MBNum:       "MB025",
+		Brand:       "MatchBox",
+		ModelName:   "Audi Quattro",
+		YearOnBase:  "1982",
+		BuyDate:     "2021-01-01",
+	}
+	c.Data["json"] = ret
+	if err := c.ServeJSON(); err != nil {
+		logs.Error("ServeJSON error:", err)
+	}
+}

@@ -115,6 +115,31 @@ paths:
     get:
       tags:
       - toy
+  /toy/{id}:
+    get:
+      tags:
+      - toy
+      description: |-
+        获取玩具详情
+        <br>
+      operationId: ToyController.获取玩具详情
+      parameters:
+      - in: path
+        name: id
+        description: 玩具ID
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.JsonToyInfo'
+        "400":
+          description: Bad Request
+        "404":
+          description: Not found
+        "500":
+          description: Internal Server Error
   /toy/list:
     get:
       tags:
